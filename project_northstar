@@ -1,0 +1,19 @@
+northstar-inventory-simulation/
+├── assignment_1_solo_recon/
+│   ├── lambda_function.py        # The SQS consumer (Unfamiliar Tool)
+│   ├── requirements.txt          # Dependencies (boto3)
+│   └── blocker_journal.md        # Your learning log
+├── assignment_2_mid_sprint/
+│   ├── src/
+│   │   ├── main.py               # FastAPI Webhook receiver (Post-Pivot)
+│   │   ├── legacy_poller.py      # The "Deprecated" polling code (for delta analysis)
+│   │   ├── idempotency.py        # Logic to prevent duplicate updates
+│   │   └── security.py           # HMAC signature verification
+│   ├── tests/
+│   │   └── test_webhooks.py      # Unit tests for the pivot
+│   ├── scope_delta_analysis.md   # The document showing what changed
+│   └── requirements.txt
+├── assignment_3_adaptability/
+│   └── adaptability_index.md     # Your peer review reflection
+├── README.md                     # The main presentation
+└── .gitignore
