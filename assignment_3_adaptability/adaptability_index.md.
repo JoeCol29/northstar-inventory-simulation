@@ -1,0 +1,13 @@
+# Adaptability Index: Self-Reflection
+
+## Composure (5/5)
+When the pivot was announced, I immediately identified that the "Polling" logic was not just "changing" but "obsolete." I did not attempt to patch the old code. I accepted the 48-hour constraint and focused entirely on the new architecture.
+
+## Communication (4/5)
+I updated the team immediately: "We are switching to Webhooks. I am building the HMAC verification layer. You focus on the database schema." I could have been more proactive in documenting the signature algorithm for others.
+
+## Flexibility (5/5)
+I discarded 80% of my Day 3 code. I embraced the new Python FastAPI framework (which I had not used before) to build the webhook receiver. This required learning a new HTTP library in a single day.
+
+## Rehire Potential (5/5)
+I delivered a secure, idempotent, and tested solution under a non-negotiable deadline. I demonstrated that I can unlearn old patterns and adopt new ones rapidly.
