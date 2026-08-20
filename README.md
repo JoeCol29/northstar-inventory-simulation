@@ -1,7 +1,7 @@
 # Northstar Inventory Sync: The Meridian Pivot Simulation
 
-> **Project Goal:** Demonstrate independent learning, architectural adaptability, and problem-solving under pressure.
-> **Scenario:** Northstar Retail Co. requires a real-time inventory sync service.
+> **Project Goal:** Demonstrate independent learning, architectural adaptability, and problem-solving under pressure.<br/>
+> **Scenario:** Northstar Retail Co. requires a real-time inventory sync service.<br/>
 > **Constraint:** A non-negotiable mid-sprint pivot from **Polling** to **Webhooks**.
 
 ## 🧠 The Challenge
