@@ -124,13 +124,13 @@ A. Duplicate Prevention (Critical)
     // 🔴 HARD BLOCK: Prevent duplicate processing
    if (status === 'SUCCESS') {
        throw new Error(`Attendee ${attendeeId} already checked in.`);
-    }
+   }
 
     // Set to PENDING immediately to block concurrent scans
    await redisClient.setex(`attendee:${attendeeId}`, 3600, 'PENDING');
 
     // Fire and forget to RabbitMQ
-    channel.sendToQueue('print-jobs', Buffer.from(JSON.stringify({ 
+   channel.sendToQueue('print-jobs', Buffer.from(JSON.stringify({ 
  attendeeId })), { persistent: true });
     return { status: 'PENDING' };
 
@@ -145,8 +145,8 @@ app.post('/webhook/print-status', async (req, res) => {
    if (processed) return res.status(200).send('OK');
 
     // Update status
-await redisClient.setex(`attendee:${req.body.attendeeId}`, 3600, 
-  req.body.status);
-    await redisClient.setex(`webhook:${requestId}`, 3600, 'true');
+   await redisClient.setex(`attendee:${req.body.attendeeId}`, 3600, 
+ req.body.status);
+   await redisClient.setex(`webhook:${requestId}`, 3600, 'true');
     res.status(200).send('OK'); 
-    });
+});
