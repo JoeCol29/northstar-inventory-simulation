@@ -137,7 +137,7 @@ A. Duplicate Prevention (Critical)
 ## B. Webhook Idempotency  
 
     // webhook_listener.js
-  app.post('/webhook/print-status', async (req, res) => {
+app.post('/webhook/print-status', async (req, res) => {
    const { requestId } = req.body;
    const processed = await redisClient.get(`webhook:${requestId}`);
     
@@ -145,7 +145,7 @@ A. Duplicate Prevention (Critical)
    if (processed) return res.status(200).send('OK');
 
     // Update status
-   await redisClient.setex(`attendee:${req.body.attendeeId}`, 3600, 
+await redisClient.setex(`attendee:${req.body.attendeeId}`, 3600, 
   req.body.status);
     await redisClient.setex(`webhook:${requestId}`, 3600, 'true');
     res.status(200).send('OK'); 
