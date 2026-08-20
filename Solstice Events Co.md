@@ -117,34 +117,36 @@ We request approval to proceed with the build of solstice-kiosk-v2 based on this
 
 A. Duplicate Prevention (Critical)
 
-// check_in_service.js
-async function handleScan(attendeeId) {
+    // check_in_service.js
+ async function handleScan(attendeeId) {
     const status = await redisClient.get(`attendee:${attendeeId}`);
     
     // 🔴 HARD BLOCK: Prevent duplicate processing
-    if (status === 'SUCCESS') {
-        throw new Error(`Attendee ${attendeeId} already checked in.`);
+   if (status === 'SUCCESS') {
+       throw new Error(`Attendee ${attendeeId} already checked in.`);
     }
 
     // Set to PENDING immediately to block concurrent scans
-    await redisClient.setex(`attendee:${attendeeId}`, 3600, 'PENDING');
+   await redisClient.setex(`attendee:${attendeeId}`, 3600, 'PENDING');
 
     // Fire and forget to RabbitMQ
-    channel.sendToQueue('print-jobs', Buffer.from(JSON.stringify({ attendeeId })), { persistent: true });
+    channel.sendToQueue('print-jobs', Buffer.from(JSON.stringify({ 
+ attendeeId })), { persistent: true });
     return { status: 'PENDING' };
-
 
 ## B. Webhook Idempotency  
 
-// webhook_listener.js
-app.post('/webhook/print-status', async (req, res) => {
-    const { requestId } = req.body;
-    const processed = await redisClient.get(`webhook:${requestId}`);
+    // webhook_listener.js
+  app.post('/webhook/print-status', async (req, res) => {
+   const { requestId } = req.body;
+   const processed = await redisClient.get(`webhook:${requestId}`);
     
     // 🔴 Ignore duplicate callbacks from vendor
-    if (processed) return res.status(200).send('OK');
+   if (processed) return res.status(200).send('OK');
 
     // Update status
-    await redisClient.setex(`attendee:${req.body.attendeeId}`, 3600, req.body.status);
+   await redisClient.setex(`attendee:${req.body.attendeeId}`, 3600, 
+  req.body.status);
     await redisClient.setex(`webhook:${requestId}`, 3600, 'true');
-    res.status(200).send('OK'); });
+    res.status(200).send('OK'); 
+    });
