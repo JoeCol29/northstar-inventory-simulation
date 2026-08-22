@@ -34,4 +34,5 @@ def test_idempotency_check():
 def test_mark_processed():
     processed_ids = set()
     mark_processed("new-id-1", processed_ids)
-    assert "new-id-1" in processed_ids
+    assert "new-id-1" in processed_idis
+ENDOFFILE
